@@ -1,0 +1,63 @@
+<div class="top-block-header">
+    <div class="row">
+        <div class="col-md-9">
+            <a class="navbar-brand ml-3" routerLink="/">
+                <img src="assets/img/logo.png" width="170" height="80" alt="News Portal" />
+            </a>
+        </div>
+        <div class="col-md-3">
+            <span style="margin-right: 10px;">
+                <a routerLink="#" class="fa fa-facebook"></a>
+            </span>
+            <span style="margin-right: 10px;">
+                <a href="#" class="fa fa-twitter"></a>
+            </span>
+            <span style="margin-right: 10px;">
+                <a href="#" class="fa fa-youtube"></a>
+            </span>
+            <span style="margin-right: 10px;">
+                <a href="#" class="fa fa-instagram"></a>
+            </span>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link" routerLink="/">Home</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/news">News</a>
+        </li>
+
+        <li class="nav-item">
+            <div ngbDropdown class="d-inline-block">
+                <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>Manage</a>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <a class="nav-link" routerLink="/manage/news">
+                        <button class="btn btn-sm" ngbDropdownItem>News</button>
+                    </a>
+                    <a class="nav-link" routerLink="/manage/user">
+                        <button class="btn btn-sm" ngbDropdownItem>User</button>
+                    </a>
+                </div>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/publish">Publish</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/signin">Signin</a>
+        </li>
+        
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/signup">Signup</a>
+        </li>
+    </ul>
+</nav>
+
+<div style="min-height: 100px;"></div>
