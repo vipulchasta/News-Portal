@@ -1,10 +1,10 @@
 <div class="row">
     <div *ngFor="let news of newsList; let i = index" class="col-md-3">
-        <div *ngIf="maxNewsCardCount==-1 || maxNewsCardCount >= i" class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 250px; margin-right: 30px;">
-            <img [lazyLoad]="news.img" [defaultImage]="defaultImage" class="card-img" style="height: 250;" />
+        <div *ngIf="maxNewsCardCount == -1 || maxNewsCardCount >= i" class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 250px; margin-right: 30px">
+            <img [lazyLoad]="news.img" [defaultImage]="defaultImage" class="card-img" style="height: 250" />
             <div class="card-body">
-                <h4 class="card-title text-center text-center">{{news.title}}</h4>
-                <p class="card-text">{{news.description}}</p>
+                <h4 class="card-title text-center text-center">{{ news.title }}</h4>
+                <p class="card-text">{{ news.description }}</p>
                 <a routerLink="#" class="btn btn-primary btn-block"> Read More</a>
             </div>
         </div>

@@ -1,26 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import {Component, OnInit} from '@angular/core';
+import {Title} from '@angular/platform-browser';
 
-import { SpinnerService } from 'src/app/services/spinner/spinner.service';
+import {SpinnerService} from 'src/app/services/spinner/spinner.service';
 
 @Component({
-  selector: 'app-publish',
-  templateUrl: './publish.component.html',
-  styleUrls: ['./publish.component.css']
+    selector: 'app-publish',
+    templateUrl: './publish.component.html',
+    styleUrls: ['./publish.component.css'],
 })
 export class PublishComponent implements OnInit {
-  screenTitle:string = "Publish || News Portal";
-  
-  constructor(private spinner : SpinnerService, private titleService: Title) { 
-    this.titleService.setTitle( this.screenTitle );
-  }
+    screenTitle: string = 'Publish || News Portal';
 
-  ngOnInit(): void {
-    this.spinner.show();
+    constructor(private spinner: SpinnerService, private titleService: Title) {
+        this.titleService.setTitle(this.screenTitle);
+    }
 
-    setTimeout(()=>{
-      this.spinner.hide();
-    }, 1500);
-  }
+    ngOnInit(): void {
+        this.spinner.show();
 
+        setTimeout(() => {
+            this.spinner.hide();
+        }, 1500);
+    }
 }
