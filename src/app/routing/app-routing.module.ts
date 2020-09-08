@@ -9,6 +9,7 @@ import {ManageUserComponent} from '../screens/manage-user/manage-user.component'
 import {ManageNewsComponent} from '../screens/manage-news/manage-news.component';
 import {PublishComponent} from '../screens/publish/publish.component';
 import {NewsScreenComponent} from '../screens/news-screen/news-screen.component';
+import {AuthGuard} from '../helper/auth.guard';
 
 const routes: Routes = [
     {
@@ -30,14 +31,17 @@ const routes: Routes = [
     {
         path: 'manage/user',
         component: ManageUserComponent,
+        canActivate: [AuthGuard],
     },
     {
         path: 'manage/news',
         component: ManageNewsComponent,
+        canActivate: [AuthGuard],
     },
     {
         path: 'publish',
         component: PublishComponent,
+        canActivate: [AuthGuard],
     },
     {
         path: '**',

@@ -1,14 +1,16 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
-import {AppRoutingModule} from './routing/app-routing.module';
-import {AppComponent} from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {LazyLoadImageModule, ScrollHooks} from 'ng-lazyload-image'; // <-- import it
 import {EditorModule, TINYMCE_SCRIPT_SRC} from '@tinymce/tinymce-angular';
 
+import {AppRoutingModule} from './routing/app-routing.module';
+import {AppComponent} from './app.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {FooterComponent} from './components/footer/footer.component';
 
@@ -21,6 +23,7 @@ import {ManageUserComponent} from './screens/manage-user/manage-user.component';
 import {PublishComponent} from './screens/publish/publish.component';
 import {NewsCardsComponent} from './components/news-cards/news-cards.component';
 import {NewsScreenComponent} from './screens/news-screen/news-screen.component';
+import {Interceptor} from './helper/interceptor';
 
 @NgModule({
     declarations: [
@@ -38,7 +41,10 @@ import {NewsScreenComponent} from './screens/news-screen/news-screen.component';
         NewsScreenComponent,
     ],
     imports: [BrowserModule, NgbModule, BrowserAnimationsModule, AppRoutingModule, LazyLoadImageModule.forRoot(ScrollHooks), NgxSpinnerModule, EditorModule],
-    providers: [{provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js'}],
+    providers: [
+        {provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js'},
+        {provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true},
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
