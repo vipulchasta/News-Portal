@@ -24,6 +24,8 @@ import {PublishComponent} from './screens/publish/publish.component';
 import {NewsCardsComponent} from './components/news-cards/news-cards.component';
 import {NewsScreenComponent} from './screens/news-screen/news-screen.component';
 import {Interceptor} from './helper/interceptor';
+import {NewsListPublisherScreenComponent} from './components/news-list-publisher-screen/news-list-publisher-screen.component';
+import {NewsListAdminScreenComponent} from './components/news-list-admin-screen/news-list-admin-screen.component';
 
 @NgModule({
     declarations: [
@@ -39,8 +41,21 @@ import {Interceptor} from './helper/interceptor';
         PublishComponent,
         NewsCardsComponent,
         NewsScreenComponent,
+        NewsListPublisherScreenComponent,
+        NewsListAdminScreenComponent,
     ],
-    imports: [BrowserModule, NgbModule, BrowserAnimationsModule, AppRoutingModule, LazyLoadImageModule.forRoot(ScrollHooks), NgxSpinnerModule, EditorModule],
+    imports: [
+        BrowserModule,
+        NgbModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        LazyLoadImageModule.forRoot(ScrollHooks),
+        NgxSpinnerModule,
+        EditorModule,
+    ],
     providers: [
         {provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js'},
         {provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true},

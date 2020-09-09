@@ -50,12 +50,16 @@
             <a class="nav-link" routerLink="/publish">Publish</a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="user == null">
             <a class="nav-link" routerLink="/signin">Signin</a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="user == null">
             <a class="nav-link" routerLink="/signup">Signup</a>
+        </li>
+
+        <li class="nav-item" *ngIf="user != null">
+            <a class="nav-link" (click)="functionOnLogout()">Signout</a>
         </li>
     </ul>
 </nav>

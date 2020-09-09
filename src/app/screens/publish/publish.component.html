@@ -2,34 +2,37 @@
     <div class="col-md-9">
         <div class="card shadow-lg p-3 mb-5 bg-white rounded">
             <div class="card-body">
-                <h5 class="card-title">
-                    <div class="form-group">
-                        <input class="form-control" style="width: 100%" type="text" placeholder="Title" />
+                <form [formGroup]="addNewsForm" (ngSubmit)="functionOnSubmit()">
+                    <h5 class="card-title">
+                        <div class="form-group">
+                            <input class="form-control" style="width: 100%" type="text" formControlName="title" placeholder="Title" />
+                        </div>
+                    </h5>
+                    <editor
+                        name="content"
+                        placeholder="Your Notepad Data Comes Here... "
+                        formControlName="content"
+                        [init]="{
+                            base_url: '/tinymce',
+                            suffix: '.min',
+                            height: 500,
+                            branding: false,
+                            plugins: [
+                                'advlist autolink lists link image charmap print preview anchor',
+                                'searchreplace visualblocks code fullscreen',
+                                'insertdatetime media table paste code help wordcount'
+                            ],
+                            toolbar:
+                                'fullscreen | formatselect | undo redo | bold italic backcolor | \
+                                alignleft aligncenter alignright alignjustify | \
+                                bullist numlist outdent indent | removeformat | help'
+                        }"
+                    >
+                    </editor>
+                    <div class="form-group m-3">
+                        <button class="btn btn-success">Publish</button>
                     </div>
-                </h5>
-                <editor
-                    name="content"
-                    placeholder="Your Notepad Data Comes Here... "
-                    [init]="{
-                        base_url: '/tinymce',
-                        suffix: '.min',
-                        height: 500,
-                        branding: false,
-                        plugins: [
-                            'advlist autolink lists link image charmap print preview anchor',
-                            'searchreplace visualblocks code fullscreen',
-                            'insertdatetime media table paste code help wordcount'
-                        ],
-                        toolbar:
-                            'fullscreen | formatselect | undo redo | bold italic backcolor | \
-                            alignleft aligncenter alignright alignjustify | \
-                            bullist numlist outdent indent | removeformat | help'
-                    }"
-                >
-                </editor>
-                <div class="form-group m-3">
-                    <button class="btn btn-success">Publish</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -40,7 +43,12 @@
                 <h5 class="card-title">News Thumbnail</h5>
                 <br />
                 <div class="form-group">
-                    <input class="form-control-file" type="file" />
+                    <label>News Image</label>
+                    <div class="custom-file mb-3">
+                        <input type="file" class="custom-file-input" (change)="onFileSelected($event)" name="newsFile" accept=".png" />
+                        <label *ngIf="this.fileToUpload == null" class="custom-file-label">Choose file</label>
+                        <label *ngIf="this.fileToUpload != null" class="custom-file-label">{{ this.fileToUpload.name }}</label>
+                    </div>
                 </div>
             </div>
         </div>

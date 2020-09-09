@@ -1,22 +1,31 @@
 <div class="row justify-content-center">
     <div class="col-md-3"></div>
     <div class="col-md-6">
-        <form class="form-container">
+        <form class="form-container" [formGroup]="loginForm" (ngSubmit)="functionOnSubmit()">
             <p class="h4 mb-5 text-center">Signin</p>
             <div style="text-align: center">
                 <img [lazyLoad]="brandImage" [defaultImage]="defaultImage" class="img-rounded" style="max-width: 400px; max-height: 200px" />
             </div>
 
             <div class="form-group">
-                <label>Email address</label>
-                <input type="email" class="form-control" placeholder="Your EmailId" />
+                <label>Mobile No</label>
+                <input [ngClass]="{'is-invalid': submitted && f.mobileNo.errors}" formControlName="mobileNo" class="form-control" placeholder="Mobile No." type="number" />
+                <div *ngIf="submitted && f.mobileNo.errors" class="invalid-feedback">
+                    <div *ngIf="f.mobileNo.errors.required">MobileNo is required</div>
+                    <div *ngIf="!f.mobileNo.errors.required">MobileNo is invalid</div>
+                </div>
                 <small class="form-text text-muted">We'll never share your details with anyone else.</small>
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" class="form-control" placeholder="Password" />
+                <input [ngClass]="{'is-invalid': submitted && f.password.errors}" formControlName="password" class="form-control" placeholder="******" type="password" />
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="!f.password.errors.required">Password is invalid</div>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Authenticate</button>
+            <button type="submit" [disabled]="submitted && this.loginForm.invalid" class="btn btn-primary btn-block">Authenticate</button>
+
             <a routerLink="/signup">
                 <p class="m-2 text-center" style="font-size: 0.8rem">Don't have an account?</p>
             </a>
