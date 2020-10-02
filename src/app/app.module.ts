@@ -25,8 +25,8 @@ import {PublishComponent} from './screens/publish/publish.component';
 import {NewsCardsComponent} from './components/news-cards/news-cards.component';
 import {NewsScreenComponent} from './screens/news-screen/news-screen.component';
 import {Interceptor} from './helper/interceptor';
-import {NewsListPublisherScreenComponent} from './components/news-list-publisher-screen/news-list-publisher-screen.component';
-import {NewsListAdminScreenComponent} from './components/news-list-admin-screen/news-list-admin-screen.component';
+import {ManageNewsAdminComponent} from './screens/manage-news-admin/manage-news-admin.component';
+import {ManageNewsPublisherComponent} from './screens/manage-news-publisher/manage-news-publisher.component';
 
 @NgModule({
     declarations: [
@@ -42,8 +42,8 @@ import {NewsListAdminScreenComponent} from './components/news-list-admin-screen/
         PublishComponent,
         NewsCardsComponent,
         NewsScreenComponent,
-        NewsListPublisherScreenComponent,
-        NewsListAdminScreenComponent,
+        ManageNewsAdminComponent,
+        ManageNewsPublisherComponent,
     ],
     imports: [
         BrowserModule,

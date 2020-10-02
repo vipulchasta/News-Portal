@@ -1,19 +1,19 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {NewsListAdminScreenComponent} from './news-list-admin-screen.component';
+import {ManageNewsAdminComponent} from './manage-news-admin.component';
 
-describe('NewsListAdminScreenComponent', () => {
-    let component: NewsListAdminScreenComponent;
-    let fixture: ComponentFixture<NewsListAdminScreenComponent>;
+describe('ManageNewsAdminComponent', () => {
+    let component: ManageNewsAdminComponent;
+    let fixture: ComponentFixture<ManageNewsAdminComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [NewsListAdminScreenComponent],
+            declarations: [ManageNewsAdminComponent],
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(NewsListAdminScreenComponent);
+        fixture = TestBed.createComponent(ManageNewsAdminComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

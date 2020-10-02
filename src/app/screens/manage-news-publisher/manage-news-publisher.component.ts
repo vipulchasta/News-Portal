@@ -10,11 +10,11 @@ import {AuthenticationService} from 'src/app/services/authentication/authenticat
 import {User} from 'src/app/modals/user';
 
 @Component({
-    selector: 'app-news-list-publisher-screen',
-    templateUrl: './news-list-publisher-screen.component.html',
-    styleUrls: ['./news-list-publisher-screen.component.css'],
+    selector: 'app-manage-news-publisher',
+    templateUrl: './manage-news-publisher.component.html',
+    styleUrls: ['./manage-news-publisher.component.css'],
 })
-export class NewsListPublisherScreenComponent implements OnInit {
+export class ManageNewsPublisherComponent implements OnInit {
     newsList: any = [];
     fileToUpload: File;
     totalRecords: number;

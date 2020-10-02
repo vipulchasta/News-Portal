@@ -36,8 +36,11 @@
             <div ngbDropdown class="d-inline-block">
                 <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>Manage</a>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <a class="nav-link" routerLink="/manage/news">
-                        <button class="btn btn-sm" ngbDropdownItem>News</button>
+                    <a class="nav-link" routerLink="/manage/news/my">
+                        <button class="btn btn-sm" ngbDropdownItem>My News</button>
+                    </a>
+                    <a class="nav-link" routerLink="/manage/news/all">
+                        <button class="btn btn-sm" ngbDropdownItem>All News</button>
                     </a>
                     <a class="nav-link" *ngIf="user == null || user.role === 'ADMIN'" routerLink="/manage/user">
                         <button class="btn btn-sm" ngbDropdownItem>User</button>

@@ -6,10 +6,11 @@ import {SignupScreenComponent} from './../screens/signup-screen/signup-screen.co
 import {SigninScreenComponent} from './../screens/signin-screen/signin-screen.component';
 import {PageNotFoundComponent} from './../screens/page-not-found/page-not-found.component';
 import {ManageUserComponent} from '../screens/manage-user/manage-user.component';
-import {ManageNewsComponent} from '../screens/manage-news/manage-news.component';
 import {PublishComponent} from '../screens/publish/publish.component';
 import {NewsScreenComponent} from '../screens/news-screen/news-screen.component';
 import {AuthGuard} from '../helper/auth.guard';
+import {ManageNewsAdminComponent} from '../screens/manage-news-admin/manage-news-admin.component';
+import {ManageNewsPublisherComponent} from '../screens/manage-news-publisher/manage-news-publisher.component';
 
 const routes: Routes = [
     {
@@ -34,8 +35,13 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
-        path: 'manage/news',
-        component: ManageNewsComponent,
+        path: 'manage/news/my',
+        component: ManageNewsPublisherComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'manage/news/all',
+        component: ManageNewsAdminComponent,
         canActivate: [AuthGuard],
     },
     {
