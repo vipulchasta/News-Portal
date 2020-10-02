@@ -31,6 +31,14 @@ export class ManageNewsPublisherComponent implements OnInit {
     };
     newsToView: any;
 
+    selectedNews = null;
+
+    getImgByPath(filePath: string) {
+        console.log('==>', filePath);
+        let fn = filePath.replace('Uploads/', '');
+        return `http://localhost:8000/ViewImg/${fn}?user_id=${this.user.id}&user_token=${this.user.token}`;
+    }
+
     getNewsURL() {
         let fn = this.newsToView.fileName.replace('Uploads/', '');
         return this.sanitizer.bypassSecurityTrustResourceUrl(`http://localhost:8000/View/${fn}?user_id=${this.user.id}&user_token=${this.user.token}`);

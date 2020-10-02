@@ -1,4 +1,13 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {DomSanitizer} from '@angular/platform-browser';
+
+import {NgbModalConfig, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgxSpinnerService} from 'ngx-spinner';
+
+import {NewsService} from 'src/app/services/news/news.service';
+import {AuthenticationService} from 'src/app/services/authentication/authentication.service';
+import {User} from 'src/app/modals/user';
 
 @Component({
     selector: 'app-news-cards',
@@ -11,100 +20,47 @@ export class NewsCardsComponent implements OnInit {
     @Input()
     maxNewsCardCount: number = 0;
 
-    newsList = [
-        {
-            title: 'News-Portal',
-            description: 'Djk h hjjdduenku dhue heuh sdrhnerio hds',
-            img: 'assets/img/logo.png',
-            content: '',
-        },
-        {
-            title: 'News-Portal',
-            description: 'Djk h hjjdduenku dhue heuh sdrhnerio hds',
-            img: 'assets/img/logo.png',
-            content: '',
-        },
-        {
-            title: 'News-Portal',
-            description: 'Djk h hjjdduenku dhue heuh sdrhnerio hds',
-            img: 'assets/img/logo.png',
-            content: '',
-        },
-        {
-            title: 'News-Portal',
-            description: 'Djk h hjjdduenku dhue heuh sdrhnerio hds',
-            img: 'assets/img/logo.png',
-            content: '',
-        },
-        {
-            title: 'News-Portal',
-            description: 'Djk h hjjdduenku dhue heuh sdrhnerio hds',
-            img: 'assets/img/logo.png',
-            content: '',
-        },
-        {
-            title: 'News-Portal',
-            description: 'Djk h hjjdduenku dhue heuh sdrhnerio hds',
-            img: 'assets/img/logo.png',
-            content: '',
-        },
-        {
-            title: 'News-Portal',
-            description: 'Djk h hjjdduenku dhue heuh sdrhnerio hds',
-            img: 'assets/img/logo.png',
-            content: '',
-        },
-        {
-            title: 'News-Portal',
-            description: 'Djk h hjjdduenku dhue heuh sdrhnerio hds',
-            img: 'assets/img/logo.png',
-            content: '',
-        },
-        {
-            title: 'News-Portal',
-            description: 'Djk h hjjdduenku dhue heuh sdrhnerio hds',
-            img: 'assets/img/logo.png',
-            content: '',
-        },
-        {
-            title: 'News-Portal',
-            description: 'Djk h hjjdduenku dhue heuh sdrhnerio hds',
-            img: 'assets/img/logo.png',
-            content: '',
-        },
-        {
-            title: 'News-Portal',
-            description: 'Djk h hjjdduenku dhue heuh sdrhnerio hds',
-            img: 'assets/img/logo.png',
-            content: '',
-        },
-        {
-            title: 'News-Portal',
-            description: 'Djk h hjjdduenku dhue heuh sdrhnerio hds',
-            img: 'assets/img/logo.png',
-            content: '',
-        },
-        {
-            title: 'News-Portal',
-            description: 'Djk h hjjdduenku dhue heuh sdrhnerio hds',
-            img: 'assets/img/logo.png',
-            content: '',
-        },
-        {
-            title: 'News-Portal',
-            description: 'Djk h hjjdduenku dhue heuh sdrhnerio hds',
-            img: 'assets/img/logo.png',
-            content: '',
-        },
-        {
-            title: 'News-Portal',
-            description: 'Djk h hjjdduenku dhue heuh sdrhnerio hds',
-            img: 'assets/img/logo.png',
-            content: '',
-        },
-    ];
+    user: User = null;
+    newsList: any = [];
+    totalRecords: number = 0;
+    selectedNews = null;
 
-    constructor() {}
+    constructor(
+        private sanitizer: DomSanitizer,
+        config: NgbModalConfig,
+        private modalService: NgbModal,
+        private spinner: NgxSpinnerService,
+        private newsService: NewsService,
+        private authenticationService: AuthenticationService,
+    ) {
+        this.authenticationService.currentUser.subscribe((x) => (this.user = x));
+    }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.fetchNews();
+    }
+
+    getImgByPath(filePath: string) {
+        console.log('==>', filePath);
+        let fn = filePath.replace('Uploads/', '');
+        return `http://localhost:8000/ViewImg/${fn}?user_id=${this.user.id}&user_token=${this.user.token}`;
+    }
+
+    openXl(content) {
+        this.modalService.open(content, {size: 'xl'});
+    }
+
+    fetchNews() {
+        this.spinner.show();
+        this.newsService.getActiveNewsList().subscribe(
+            (data) => {
+                this.newsList = data;
+                this.totalRecords = this.newsList.length;
+                this.spinner.hide();
+            },
+            (error) => {
+                this.spinner.hide();
+            },
+        );
+    }
 }

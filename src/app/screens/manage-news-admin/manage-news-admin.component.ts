@@ -24,9 +24,17 @@ export class ManageNewsAdminComponent implements OnInit {
     user: User = null;
     newsToView: any;
 
+    selectedNews = null;
+
     getNewsURL() {
         let fn = this.newsToView.fileName.replace('Uploads/', '');
         return this.sanitizer.bypassSecurityTrustResourceUrl(`http://localhost:8000/View/${fn}?user_id=${this.user.id}&user_token=${this.user.token}`);
+    }
+
+    getImgByPath(filePath: string) {
+        console.log('==>', filePath);
+        let fn = filePath.replace('Uploads/', '');
+        return `http://localhost:8000/ViewImg/${fn}?user_id=${this.user.id}&user_token=${this.user.token}`;
     }
 
     onFileSelected(event) {

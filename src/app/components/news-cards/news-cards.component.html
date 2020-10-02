@@ -1,11 +1,38 @@
+<ng-template #viewimg let-c="close" let-d="dismiss">
+    <div class="modal-header text-white bg-dark" *ngIf="selectedNews !== null">
+        <h4 class="modal-title" id="modal-basic-title">{{ selectedNews.title }}</h4>
+        <button type="button" class="close text-white" style="outline: none" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" style="padding: 30px; margin-bottom: 20px">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <img [src]="getImgByPath(selectedNews.fileName)" style="width: 100%" />
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        <hr />
+        <div class="row" style="margin-top: 20px">
+            <div class="col-md-12">
+                <div [innerHTML]="selectedNews.content"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="c('Save click')">Close</button>
+    </div>
+</ng-template>
+
 <div class="row">
     <div *ngFor="let news of newsList; let i = index" class="col-md-3">
-        <div *ngIf="maxNewsCardCount == -1 || maxNewsCardCount >= i" class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 250px; margin-right: 30px">
-            <img [lazyLoad]="news.img" [defaultImage]="defaultImage" class="card-img" style="height: 250" />
+        <div *ngIf="maxNewsCardCount == -1 || maxNewsCardCount > i" class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 250px; margin-right: 30px; height: 100%">
+            <img [lazyLoad]="getImgByPath(news.fileName)" [defaultImage]="defaultImage" class="card-img" style="height: 250" />
             <div class="card-body">
                 <h4 class="card-title text-center text-center">{{ news.title }}</h4>
                 <p class="card-text">{{ news.description }}</p>
-                <a routerLink="#" class="btn btn-primary btn-block"> Read More</a>
+                <a style="position: absolute; bottom: 0px; left: 0px" (click)="selectedNews = news; openXl(viewimg)" class="btn btn-primary btn-block"> Read More</a>
             </div>
         </div>
     </div>

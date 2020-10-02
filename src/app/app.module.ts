@@ -19,7 +19,6 @@ import {MainScreenComponent} from './screens/main-screen/main-screen.component';
 import {SigninScreenComponent} from './screens/signin-screen/signin-screen.component';
 import {SignupScreenComponent} from './screens/signup-screen/signup-screen.component';
 import {PageNotFoundComponent} from './screens/page-not-found/page-not-found.component';
-import {ManageNewsComponent} from './screens/manage-news/manage-news.component';
 import {ManageUserComponent} from './screens/manage-user/manage-user.component';
 import {PublishComponent} from './screens/publish/publish.component';
 import {NewsCardsComponent} from './components/news-cards/news-cards.component';
@@ -37,7 +36,6 @@ import {ManageNewsPublisherComponent} from './screens/manage-news-publisher/mana
         SigninScreenComponent,
         SignupScreenComponent,
         PageNotFoundComponent,
-        ManageNewsComponent,
         ManageUserComponent,
         PublishComponent,
         NewsCardsComponent,
