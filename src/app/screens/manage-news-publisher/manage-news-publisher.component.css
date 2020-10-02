@@ -1,0 +1,14 @@
+th {
+    width: 14%;
+}
+
+td {
+    width: 14%;
+}
+
+.card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #000;
+}

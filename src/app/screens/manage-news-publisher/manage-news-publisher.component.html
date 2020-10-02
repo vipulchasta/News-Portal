@@ -1,1 +1,37 @@
-<p>manage-news-publisher works!</p>
+<div class="card">
+    <div class="py-2" style="font-size: x-large">
+        <a class="text-black ml-5"><b>Manage News</b></a>
+    </div>
+    <div class="table-wrapper">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">Id</th>
+                    <th scope="col">News Title</th>
+                    <th scope="col">Admin Approval</th>
+                    <th scope="col">Publisher Approval</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <tr *ngFor="let news of newsList; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ news.title }}</td>
+                    <td>{{ news.adminApproval === 1 ? 'Yes' : 'No' }}</td>
+                    <td>{{ news.publisherApproval === 1 ? 'Yes' : 'No' }}</td>
+                    <td>
+                        <button *ngIf="news.adminApproval === 0" (click)="clickOnPublisherStatus(news.id, 1)" class="btn" style="color: rgb(9, 216, 9); font-size: 18px">
+                            <i class="fa fa-check"></i>
+                        </button>
+                        <button *ngIf="news.adminApproval === 1" (click)="clickOnPublisherStatus(news.id, 0)" class="btn" style="color: red; font-size: 18px">
+                            <i class="fa fa-times"></i>
+                        </button>
+                        <button (click)="clickOnDelete(news.id)" class="btn" style="color: red; font-size: 18px">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
