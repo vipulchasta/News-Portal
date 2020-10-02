@@ -39,7 +39,7 @@
                     <a class="nav-link" routerLink="/manage/news">
                         <button class="btn btn-sm" ngbDropdownItem>News</button>
                     </a>
-                    <a class="nav-link" routerLink="/manage/user">
+                    <a class="nav-link" *ngIf="user == null || user.role === 'ADMIN'" routerLink="/manage/user">
                         <button class="btn btn-sm" ngbDropdownItem>User</button>
                     </a>
                 </div>

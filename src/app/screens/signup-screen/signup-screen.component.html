@@ -30,11 +30,11 @@
             </div>
 
             <div class="form-group" *ngIf="this.f.role.value === 'PUBLISHER'">
-                <label>ID Proof [.jpg]</label>
+                <label>ID Proof [.png]</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
-                    <input type="file" (change)="onFileSelected($event)" class="custom-file-input" accept=".jpg" placeholder="Choose File" />
-                    <label *ngIf="this.fileToUpload == null" class="custom-file-label">Choose file</label>
+                    <input type="file" (change)="onFileSelected($event)" class="custom-file-input" accept=".png" placeholder="Choose File" />
+                    <label *ngIf="this.fileToUpload == null" class="custom-file-label">Choose file [.png]</label>
                     <label *ngIf="this.fileToUpload != null" class="custom-file-label">{{ this.fileToUpload.name }}</label>
                 </div>
             </div>

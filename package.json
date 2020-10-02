@@ -24,6 +24,7 @@
         "@tinymce/tinymce-angular": "^3.5.1",
         "bootstrap": "^4.4.0",
         "ng-lazyload-image": "^8.0.1",
+        "ngx-pagination": "^5.0.0",
         "ngx-spinner": "^9.0.2",
         "rxjs": "~6.5.4",
         "tinymce": "^5.2.2",

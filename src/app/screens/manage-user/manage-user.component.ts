@@ -25,6 +25,32 @@ export class ManageUserComponent implements OnInit {
     user: User = null;
     fileToUpload: File;
 
+    constructor(
+        private spinner: SpinnerService,
+        private titleService: Title,
+        private formBuilder: FormBuilder,
+        private sanitizer: DomSanitizer,
+        config: NgbModalConfig,
+        private modalService: NgbModal,
+        private userService: UserService,
+        private authenticationService: AuthenticationService,
+    ) {
+        this.titleService.setTitle(this.screenTitle);
+
+        this.authenticationService.currentUser.subscribe((x) => (this.user = x));
+    }
+
+    ngOnInit(): void {
+        this.fetchUsers();
+
+        this.signupForm = this.formBuilder.group({
+            name: ['', Validators.required],
+            role: ['', Validators.required],
+            password: ['', [Validators.required, Validators.minLength(5)]],
+            mobileNo: ['', [Validators.required, Validators.min(999999999)]],
+        });
+    }
+
     getimgURL() {
         let fn = this.userToView.fileName.replace('Uploads/', '');
         return this.sanitizer.bypassSecurityTrustResourceUrl(`http://localhost:8000/ViewImg/${fn}?user_id=${this.user.id}&user_token=${this.user.token}`);
@@ -88,6 +114,7 @@ export class ManageUserComponent implements OnInit {
         this.userService.updateStatus(userId, status).subscribe(
             (data) => {
                 this.fetchUsers();
+                this.spinner.hide();
             },
             (error) => {
                 this.spinner.hide();
@@ -100,6 +127,7 @@ export class ManageUserComponent implements OnInit {
         this.userService.deleteUser(userId).subscribe(
             (data) => {
                 this.fetchUsers();
+                this.spinner.hide();
             },
             (error) => {
                 this.spinner.hide();
@@ -119,31 +147,5 @@ export class ManageUserComponent implements OnInit {
                 this.spinner.hide();
             },
         );
-    }
-
-    ngOnInit(): void {
-        this.fetchUsers();
-
-        this.signupForm = this.formBuilder.group({
-            name: ['', Validators.required],
-            role: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(5)]],
-            mobileNo: ['', [Validators.required, Validators.min(999999999)]],
-        });
-    }
-
-    constructor(
-        private spinner: SpinnerService,
-        private titleService: Title,
-        private formBuilder: FormBuilder,
-        private sanitizer: DomSanitizer,
-        config: NgbModalConfig,
-        private modalService: NgbModal,
-        private userService: UserService,
-        private authenticationService: AuthenticationService,
-    ) {
-        this.titleService.setTitle(this.screenTitle);
-
-        this.authenticationService.currentUser.subscribe((x) => (this.user = x));
     }
 }

@@ -8,6 +8,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {LazyLoadImageModule, ScrollHooks} from 'ng-lazyload-image'; // <-- import it
 import {EditorModule, TINYMCE_SCRIPT_SRC} from '@tinymce/tinymce-angular';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import {AppRoutingModule} from './routing/app-routing.module';
 import {AppComponent} from './app.component';
@@ -55,6 +56,7 @@ import {NewsListAdminScreenComponent} from './components/news-list-admin-screen/
         LazyLoadImageModule.forRoot(ScrollHooks),
         NgxSpinnerModule,
         EditorModule,
+        NgxPaginationModule,
     ],
     providers: [
         {provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js'},

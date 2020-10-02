@@ -1,1 +1,136 @@
-<p>manage-user works!</p>
+<ng-template #viewimg let-c="close" let-d="dismiss">
+    <div class="modal-header text-white bg-dark">
+        <h4 class="modal-title" id="modal-basic-title">Hey, Got Publisher's Id Proof!</h4>
+        <button type="button" class="close text-white" style="outline: none" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" style="padding: 30px">
+        <img [src]="getimgURL()" width="100%" height="500px" />
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="c('Save click')">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header text-white bg-dark">
+        <h4 class="modal-title" id="modal-basic-title">Hey, Got new user!</h4>
+        <button type="button" class="close text-white" style="outline: none" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" style="background-color: white; padding: 30px">
+        <form [formGroup]="signupForm" (ngSubmit)="functionOnSubmit()">
+            <div class="form-group">
+                <label>Name</label>
+                <input [ngClass]="{'is-invalid': submitted && f.name.errors}" formControlName="name" type="text" class="form-control" aria-describedby="nameHelp" placeholder="Enter Name" />
+
+                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                    <div *ngIf="f.name.errors.required">Name is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Role</label>
+                <!--<input [(ngModel)]="newUser.role" name="role" type="text" class="form-control" id="role" aria-describedby="roleHelp" placeholder="Enter Role" />-->
+                <select [ngClass]="{'is-invalid': submitted && f.role.errors}" class="form-control" formControlName="role">
+                    <option disabled value="">Select Role</option>
+                    <option value="READER">Reader</option>
+                    <option value="PUBLISHER">Publisher</option>
+                </select>
+
+                <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                    <div *ngIf="f.role.errors.required">Role is required</div>
+                </div>
+            </div>
+            <div class="form-group" *ngIf="this.f.role.value === 'PUBLISHER'">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+                    <input type="file" (change)="onFileSelected($event)" class="custom-file-input" accept=".png" placeholder="Choose File" />
+                    <label *ngIf="this.fileToUpload == null" class="custom-file-label">Choose file [.png]</label>
+                    <label *ngIf="this.fileToUpload != null" class="custom-file-label">{{ this.fileToUpload.name }}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Mobile No</label>
+                <input [ngClass]="{'is-invalid': submitted && f.mobileNo.errors}" type="number" class="form-control" formControlName="mobileNo" placeholder="Enter Mobile No." />
+
+                <div *ngIf="submitted && f.mobileNo.errors" class="invalid-feedback">
+                    <div *ngIf="f.mobileNo.errors.required">MobileNo is required</div>
+                    <div *ngIf="!f.mobileNo.errors.required">MobileNo is invalid</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>password</label>
+                <input [ngClass]="{'is-invalid': submitted && f.password.errors}" type="password" class="form-control" formControlName="password" id="password" placeholder="Enter Password" />
+
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="!f.password.errors.required">Password is invalid</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<div class="row">
+    <div class="col-md-4 h-100" *ngFor="let user of userList | paginate: {id: 'pagination_list', itemsPerPage: 12, currentPage: page, totalItems: totalRecords}">
+        <div class="card shadow-lg p-3 mb-5 bg-white rounded h-100">
+            <div class="card-body h-100 rounded">
+                <h4 class="card-title" class="d-inline-block text-truncate text-capitalize" style="max-width: 150px" ngbTooltip="{{ user.name }}">{{ user.name }}</h4>
+                <p class="card-text">
+                    <b>Id: </b> {{ user.id }}<br />
+                    <b>Role: </b>{{ user.role }}<br />
+                    <b>Mobile NO: </b> {{ user.mobile_no }}<br />
+                    <b>Password: </b> {{ user.password }}<br />
+                    <b>Status: </b> {{ user.status }}<br />
+                    <b>Time: </b> <span style="font-size: smaller">{{ user.time }}</span
+                    ><br />
+                </p>
+                <div>
+                    <button *ngIf="user.role == 'PUBLISHER'" class="btn btn-md m-1" (click)="userToView = user; openXl(viewimg)" style="color: skyblue">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-md m-1" (click)="clickOnUpdateStatus(user.id, 'ACTIVE')" style="color: greenyellow">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-md m-1" (click)="clickOnUpdateStatus(user.id, 'INACTIVE')" style="color: red">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-md m-1" (click)="clickOnDelete(user.id)" style="color: red">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 h-100">
+        <div class="card shadow-lg p-3 mb-5 bg-white rounded h-100">
+            <div class="card-body h-100 rounded">
+                <h5 class="card-title" class="d-inline-block text-truncate" style="max-width: 150px">Add New User</h5>
+                <p class="card-text">
+                    <button class="btn btn-md btn-info m-1 float-right" (click)="open(content)">Add New</button>
+                </p>
+                <div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 h-100">
+        <div class="card shadow-lg mb-5 bg-white rounded h-100">
+            <div class="card-body h-100 rounded">
+                <div class="pagination">
+                    <pagination-controls id="pagination_list" maxSixe="5" directionLinks="true" (pageChange)="page = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
