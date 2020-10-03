@@ -1,6 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {DomSanitizer} from '@angular/platform-browser';
 
 import {NgbModalConfig, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NgxSpinnerService} from 'ngx-spinner';
@@ -25,14 +23,7 @@ export class NewsCardsComponent implements OnInit {
     totalRecords: number = 0;
     selectedNews = null;
 
-    constructor(
-        private sanitizer: DomSanitizer,
-        config: NgbModalConfig,
-        private modalService: NgbModal,
-        private spinner: NgxSpinnerService,
-        private newsService: NewsService,
-        private authenticationService: AuthenticationService,
-    ) {
+    constructor(config: NgbModalConfig, private modalService: NgbModal, private spinner: NgxSpinnerService, private newsService: NewsService, private authenticationService: AuthenticationService) {
         this.authenticationService.currentUser.subscribe((x) => (this.user = x));
     }
 

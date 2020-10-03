@@ -16,6 +16,7 @@ const routes: Routes = [
     {
         path: '',
         component: MainScreenComponent,
+        canActivate: [AuthGuard],
     },
     {
         path: 'signin',
@@ -28,6 +29,7 @@ const routes: Routes = [
     {
         path: 'news',
         component: NewsScreenComponent,
+        canActivate: [AuthGuard],
     },
     {
         path: 'manage/user',

@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
 
         this.authenticationService.logout();
         if (!this.authenticationService.currentUserValue) {
-            this.router.navigate(['/']);
+            this.router.navigate(['/signin']);
         }
     }
 }
