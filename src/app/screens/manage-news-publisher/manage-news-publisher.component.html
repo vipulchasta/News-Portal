@@ -43,7 +43,10 @@
             <tbody class="text-center">
                 <tr *ngFor="let news of newsList; let i = index">
                     <td>{{ i + 1 }}</td>
-                    <td>{{ news.title }}</td>
+                    <td>
+                        {{ news.title }}
+                        <p class="text-center" style="font-size: smaller">{{ news.time | date: 'medium' }}</p>
+                    </td>
                     <td>{{ news.adminApproval === 1 ? 'Yes' : 'No' }}</td>
                     <td>{{ news.publisherApproval === 1 ? 'Yes' : 'No' }}</td>
                     <td>
